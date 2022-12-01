@@ -3,33 +3,33 @@
 namespace Teamnovu\StatamicUnusedAssets\Services;
 
 use Illuminate\Support\Facades\Cache;
-use Statamic\Facades\Asset;
-use Statamic\Assets\AssetCollection;
 use Illuminate\Support\Facades\File;
+use Statamic\Assets\AssetCollection;
+use Statamic\Facades\Asset;
 
 class Service
 {
     public function getCacheKey()
     {
-        return "widgets::StatamicUnusedAssets";
+        return 'widgets::StatamicUnusedAssets';
     }
 
-    public function clearCache() : void
+    public function clearCache(): void
     {
         Cache::forget($this->getCacheKey());
     }
 
-    public function getUnusedAssets(): Array
+    public function getUnusedAssets(): array
     {
         return Cache::rememberForever(
             $this->getCacheKey(),
-            function ()  {
+            function () {
                 return $this->filterUnused(Asset::all());
             }
         );
     }
 
-    private function filterUnused(AssetCollection $assets): Array
+    private function filterUnused(AssetCollection $assets): array
     {
         collect(File::allFiles(base_path('content')))->each(function ($contentFile) use ($assets) {
             $contents = file_get_contents($contentFile);
@@ -54,7 +54,6 @@ class Service
                 'api_url' => $asset->apiUrl(),
             ];
         })->all();
-
     }
 
     public function preloadCache(): void

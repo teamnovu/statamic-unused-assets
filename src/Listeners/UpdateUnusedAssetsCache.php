@@ -7,13 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Statamic\Events\AssetDeleted;
 use Statamic\Events\AssetSaved;
 use Statamic\Events\AssetUploaded;
-use Statamic\Events\EntrySaved;
 use Statamic\Events\EntryDeleted;
-use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\EntrySaved;
 use Statamic\Events\GlobalSetDeleted;
-use Statamic\Events\TermSaved;
+use Statamic\Events\GlobalSetSaved;
 use Statamic\Events\TermDeleted;
-
+use Statamic\Events\TermSaved;
 
 class UpdateUnusedAssetsCache implements ShouldQueue
 {

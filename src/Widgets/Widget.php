@@ -23,7 +23,7 @@ class Widget extends BaseWidget
         $assets = $this->service->getUnusedAssets();
 
         return view('statamic-unused-assets::widgets.unused-assets', [
-            'assets' => array_slice($assets, 0 , $this->config('limit', 5)),
+            'assets' => array_slice($assets, 0, $this->config('limit', 5)),
             'amount' => count($assets),
         ]);
     }
