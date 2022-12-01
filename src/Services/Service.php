@@ -51,7 +51,7 @@ class Service
                 'title' => $asset->title(),
                 'path' => $asset->path(),
                 'container' => $asset->container()->handle(),
-                'api_url' => $asset->apiUrl(),
+                'edit_url' => $asset->editUrl(),
             ];
         })->all();
     }
