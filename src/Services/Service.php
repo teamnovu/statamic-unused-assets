@@ -9,7 +9,6 @@ use Statamic\Facades\Entry;
 use Statamic\Facades\GlobalSet;
 use Statamic\Facades\Term;
 
-
 class Service
 {
     public function getCacheKey()
@@ -39,7 +38,6 @@ class Service
             ->merge(GlobalSet::all());
 
         collect($contents)->each(function ($content) use ($assets) {
-
             if ($content instanceof \Statamic\Entries\Entry) {
                 $contentValues = $content->values();
             }
@@ -49,7 +47,7 @@ class Service
             }
 
             // https://statamic.dev/repositories/global-repository
-            if ($content instanceof \Statamic\Globals\GlobalSet){
+            if ($content instanceof \Statamic\Globals\GlobalSet) {
                 $set = GlobalSet::findByHandle($content->handle());
                 $data = $set->inDefaultSite();
                 $contentValues = $data->values();
@@ -62,7 +60,6 @@ class Service
                         $assets->forget($index);
                     }
                 });
-
             }
         });
 
