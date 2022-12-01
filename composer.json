@@ -18,7 +18,7 @@
     "extra": {
         "statamic": {
             "name": "Statamic Images Missing Alt",
-            "description": "Addon to list all images with no alt text on your Statamic dashboard."
+            "description": "Addon to list all assets not in use on your Statamic dashboard."
         },
         "laravel": {
             "providers": [
