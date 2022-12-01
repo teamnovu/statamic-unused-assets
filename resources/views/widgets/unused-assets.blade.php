@@ -27,7 +27,7 @@
             <td>
                 <div class="flex items-center w-full">
                     <div class="little-dot mr-1 bg-orange"></div>
-                    <a class="w-full flex justify-between space-x-2" href="{{ $asset['api_url'] }}" aria-label="{{ __('statamic-unused-assets::unused-assets.edit') }}">
+                    <a class="w-full flex justify-between space-x-2" href="{{ $asset['edit_url'] }}" aria-label="{{ __('statamic-unused-assets::unused-assets.edit') }}">
                         <span>{{ $asset['title'] }}</span> <span> :{{ $asset['container'] }}</span>
                     </a>
                 </div>

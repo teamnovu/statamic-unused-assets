@@ -66,12 +66,13 @@ class Service
         $assets->multisort('container:desc|title:desc');
 
         return $assets->map(function ($asset) {
+            rd($asset->toArray());
             return [
                 'id' => $asset->id(),
                 'title' => $asset->title(),
                 'path' => $asset->path(),
                 'container' => $asset->container()->handle(),
-                'api_url' => $asset->apiUrl(),
+                'edit_url' => $asset->editUrl(),
             ];
         })->all();
     }
