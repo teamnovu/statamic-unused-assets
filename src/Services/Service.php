@@ -67,6 +67,7 @@ class Service
 
         return $assets->map(function ($asset) {
             rd($asset->toArray());
+
             return [
                 'id' => $asset->id(),
                 'title' => $asset->title(),
