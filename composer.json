@@ -1,5 +1,5 @@
 {
-    "name": "teamnovu/statamic-unused-images",
+    "name": "teamnovu/statamic-unused-assets",
     "description": "Addon to list all images with no alt text on your Statamic dashboard.",
     "license": "MIT",
     "autoload": {
