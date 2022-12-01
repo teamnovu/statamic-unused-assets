@@ -3,9 +3,12 @@
 namespace Teamnovu\StatamicUnusedAssets\Services;
 
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\File;
 use Statamic\Assets\AssetCollection;
 use Statamic\Facades\Asset;
+use Statamic\Facades\Entry;
+use Statamic\Facades\GlobalSet;
+use Statamic\Facades\Term;
+
 
 class Service
 {
@@ -31,18 +34,38 @@ class Service
 
     private function filterUnused(AssetCollection $assets): array
     {
-        collect(File::allFiles(base_path('content')))->each(function ($contentFile) use ($assets) {
-            $contents = file_get_contents($contentFile);
+        $contents = Entry::all()
+            ->merge(Term::all())
+            ->merge(GlobalSet::all());
 
-            $assets->each(function ($asset, $index) use ($contents, $assets) {
-                // If asset is used in content, then remove it from unused list.
-                if (strpos($contents, $asset->path()) !== false) {
-                    $assets->forget($index);
-                }
-            });
+        collect($contents)->each(function ($content) use ($assets) {
+
+            if ($content instanceof \Statamic\Entries\Entry) {
+                $contentValues = $content->values();
+            }
+
+            if ($content instanceof \Statamic\Taxonomies\Term || $content instanceof \Statamic\Taxonomies\LocalizedTerm) {
+                $contentValues = $content->values();
+            }
+
+            // https://statamic.dev/repositories/global-repository
+            if ($content instanceof \Statamic\Globals\GlobalSet){
+                $set = GlobalSet::findByHandle($content->handle());
+                $data = $set->inDefaultSite();
+                $contentValues = $data->values();
+            }
+
+            foreach ($contentValues as $value) {
+                $assets->each(function ($asset, $index) use ($value, $assets) {
+                    // If asset is used in content, then remove it from unused list.
+                    if ($asset->path() === $value) {
+                        $assets->forget($index);
+                    }
+                });
+
+            }
         });
 
-        // assets map certain pops
         $assets->multisort('container:desc|title:desc');
 
         return $assets->map(function ($asset) {

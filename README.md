@@ -41,7 +41,14 @@ The following is an example which shows all the possible config values you can u
 > GlobalSetDeleted, GlobalSetSaved
 > are fired.
 
+## Development
+
+This addon workers due to the potential heavy workload. To test the addon localy a queue worker needs to be running e.g.
+
+``` bash
+php artisan queue:work
+```
+
 ## Credit
 
-This widget has basically been extracted from the [Statamic Peak starter kit](https://github.com/studio1902/statamic-peak) and
-merged with [swiftmade/statamic-clear-assets](https://github.com/swiftmade/statamic-clear-assets)
+This widget has basically been extracted from the [Statamic Peak starter kit](https://github.com/studio1902/statamic-peak)
