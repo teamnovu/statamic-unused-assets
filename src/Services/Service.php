@@ -66,7 +66,6 @@ class Service
         $assets->multisort('container:desc|title:desc');
 
         return $assets->map(function ($asset) {
-
             return [
                 'id' => $asset->id(),
                 'title' => $asset->title(),
