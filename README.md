@@ -51,4 +51,4 @@ php artisan queue:work
 
 ## Credit
 
-This widget has basically been extracted from the [Statamic Peak starter kit](https://github.com/studio1902/statamic-peak)
+This widget has basically been extracted from the [Statamic Peak starter kit](https://github.com/studio1902/statamic-peak) updated with inspiration from [Swiftmade Statamic Clear Assets](https://github.com/swiftmade/statamic-clear-assets)
