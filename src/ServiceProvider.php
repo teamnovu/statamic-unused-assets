@@ -12,37 +12,37 @@ use Statamic\Events\GlobalSetSaved;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
 use Statamic\Providers\AddonServiceProvider;
-use Teamnovu\StatamicUnusedAssets\Listeners\UpdateUnusedImagesCache;
+use Teamnovu\StatamicUnusedAssets\Listeners\UpdateUnusedAssetsCache;
 
 class ServiceProvider extends AddonServiceProvider
 {
     protected $listen = [
         AssetDeleted::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         AssetSaved::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         AssetUploaded::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         EntrySaved::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         EntryDeleted::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         GlobalSetSaved::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         GlobalSetDeleted::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         TermSaved::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
         TermDeleted::class => [
-            UpdateUnusedImagesCache::class,
+            UpdateUnusedAssetsCache::class,
         ],
     ];
 
