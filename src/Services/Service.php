@@ -25,7 +25,7 @@ class Service
     {
         return Cache::rememberForever(
             $this->getCacheKey(),
-            function ()  {
+            function () {
                 return $this->filterUnused(Asset::all());
             }
         );
