@@ -23,8 +23,8 @@ class Service
 
     public function getUnusedAssets($excludedPaths): array
     {
-
         return $this->filterUnused(Asset::all(), $excludedPaths);
+
         return Cache::rememberForever(
             $this->getCacheKey(),
             function () use ($excludedPaths) {
@@ -33,14 +33,11 @@ class Service
         );
     }
 
-    private function filterUnused(AssetCollection $assets, Array $excludedPaths): array
+    private function filterUnused(AssetCollection $assets, array $excludedPaths): array
     {
-
         // remove all excluded assets
         if (is_array($excludedPaths)) {
-
             $assets->each(function ($asset, $index) use ($excludedPaths, $assets) {
-
                 foreach ($excludedPaths as $path) {
                     if (str_contains($asset->container()->handle().'/'.$asset->path(), $path)) {
                         $assets->forget($index);
@@ -56,7 +53,6 @@ class Service
         collect($contents)->each(function ($content) use ($assets) {
             if ($content instanceof \Statamic\Entries\Entry) {
                 $contentValues = $content->values();
-
             }
 
             if ($content instanceof \Statamic\Taxonomies\Term || $content instanceof \Statamic\Taxonomies\LocalizedTerm) {
