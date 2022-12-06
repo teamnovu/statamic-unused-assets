@@ -21,29 +21,18 @@ class Service
         Cache::forget($this->getCacheKey());
     }
 
-    public function getUnusedAssets($excludedPaths): array
+    public function getUnusedAssets(): AssetCollection
     {
         return Cache::rememberForever(
             $this->getCacheKey(),
-            function () use ($excludedPaths) {
-                return $this->filterUnused(Asset::all(), $excludedPaths);
+            function ()  {
+                return $this->filterUnused(Asset::all());
             }
         );
     }
 
-    private function filterUnused(AssetCollection $assets, array $excludedPaths): array
+    private function filterUnused(AssetCollection $assets): AssetCollection
     {
-        // remove all excluded assets
-        if (is_array($excludedPaths)) {
-            $assets->each(function ($asset, $index) use ($excludedPaths, $assets) {
-                foreach ($excludedPaths as $path) {
-                    if (str_contains($asset->container()->handle().'/'.$asset->path(), $path)) {
-                        $assets->forget($index);
-                    }
-                }
-            });
-        }
-
         $contents = Entry::all()
             ->merge(Term::all())
             ->merge(GlobalSet::all());
@@ -84,7 +73,7 @@ class Service
                 'container' => $asset->container()->handle(),
                 'edit_url' => $asset->editUrl(),
             ];
-        })->all();
+        });
     }
 
     public function preloadCache(): void
