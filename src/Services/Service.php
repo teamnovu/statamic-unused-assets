@@ -23,8 +23,6 @@ class Service
 
     public function getUnusedAssets($excludedPaths): array
     {
-        return $this->filterUnused(Asset::all(), $excludedPaths);
-
         return Cache::rememberForever(
             $this->getCacheKey(),
             function () use ($excludedPaths) {
