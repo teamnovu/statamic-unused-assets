@@ -1,6 +1,6 @@
 {
     "name": "teamnovu/statamic-unused-assets",
-    "description": "Addon to list all images with no alt text on your Statamic dashboard.",
+    "description": "Addon to list all assets not in use on your Statamic dashboard.",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -17,7 +17,7 @@
     },
     "extra": {
         "statamic": {
-            "name": "Statamic Images Missing Alt",
+            "name": "Statamic Unused Assets",
             "description": "Addon to list all assets not in use on your Statamic dashboard."
         },
         "laravel": {

@@ -21,18 +21,34 @@ class Service
         Cache::forget($this->getCacheKey());
     }
 
-    public function getUnusedAssets(): array
+    public function getUnusedAssets($excludedPaths): array
     {
+
+        return $this->filterUnused(Asset::all(), $excludedPaths);
         return Cache::rememberForever(
             $this->getCacheKey(),
-            function () {
-                return $this->filterUnused(Asset::all());
+            function () use ($excludedPaths) {
+                return $this->filterUnused(Asset::all(), $excludedPaths);
             }
         );
     }
 
-    private function filterUnused(AssetCollection $assets): array
+    private function filterUnused(AssetCollection $assets, Array $excludedPaths): array
     {
+
+        // remove all excluded assets
+        if (is_array($excludedPaths)) {
+
+            $assets->each(function ($asset, $index) use ($excludedPaths, $assets) {
+
+                foreach ($excludedPaths as $path) {
+                    if (str_contains($asset->container()->handle().'/'.$asset->path(), $path)) {
+                        $assets->forget($index);
+                    }
+                }
+            });
+        }
+
         $contents = Entry::all()
             ->merge(Term::all())
             ->merge(GlobalSet::all());
@@ -40,6 +56,7 @@ class Service
         collect($contents)->each(function ($content) use ($assets) {
             if ($content instanceof \Statamic\Entries\Entry) {
                 $contentValues = $content->values();
+
             }
 
             if ($content instanceof \Statamic\Taxonomies\Term || $content instanceof \Statamic\Taxonomies\LocalizedTerm) {

@@ -24,11 +24,12 @@ The following is an example which shows all the possible config values you can u
 'widgets' => [
     // ...
 
-    [
-        'type' => 'unused-assets', // Required
-        'limit' => 10, // Default: 5 – The number of images to display in the widget.
-        'width' => 100, // Default: 100 – The size of the widget.
-    ],
+        [
+            'type' => 'unused-assets', // Required
+            'limit' => 300, // Default: 5 – The number of images to display in the widget.
+            'width' => 100, // Default: 100 – The size of the widget.
+            'excluded_paths' => [], // Example: [assets/myFolder/] - Default: [] – The paths to exclude from the search.
+        ],
 ],
 ```
 

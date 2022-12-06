@@ -20,7 +20,7 @@ class Widget extends BaseWidget
      */
     public function html()
     {
-        $assets = $this->service->getUnusedAssets();
+        $assets = $this->service->getUnusedAssets($this->config('excluded_paths'));
 
         return view('statamic-unused-assets::widgets.unused-assets', [
             'assets' => array_slice($assets, 0, $this->config('limit', 5)),
