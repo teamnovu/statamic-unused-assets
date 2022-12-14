@@ -13,25 +13,21 @@ use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
+use Teamnovu\StatamicUnusedAssets\UnusedAssets;
 
-class UpdateUnusedAssetsCache implements ShouldQueue
+class UpdateUnusedAssetsCacheListener implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
     public function __construct(
-        protected \Teamnovu\StatamicUnusedAssets\Services\Service $service,
+        protected UnusedAssets $unusedAssets,
     ) {
     }
 
         public function handle($event)
         {
-            $this->service->clearCache();
-            $this->service->preloadCache();
+            $this->unusedAssets->clearCache();
+            $this->unusedAssets->preloadCache();
         }
 
         /**

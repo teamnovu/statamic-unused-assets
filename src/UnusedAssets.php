@@ -1,6 +1,6 @@
 <?php
 
-namespace Teamnovu\StatamicUnusedAssets\Services;
+namespace Teamnovu\StatamicUnusedAssets;
 
 use Illuminate\Support\Facades\Cache;
 use Statamic\Assets\AssetCollection;
@@ -9,7 +9,7 @@ use Statamic\Facades\Entry;
 use Statamic\Facades\GlobalSet;
 use Statamic\Facades\Term;
 
-class Service
+class UnusedAssets
 {
     public function getCacheKey()
     {

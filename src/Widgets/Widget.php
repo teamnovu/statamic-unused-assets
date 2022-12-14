@@ -9,7 +9,7 @@ class Widget extends BaseWidget
     protected static $handle = 'unused-assets';
 
     public function __construct(
-        protected \Teamnovu\StatamicUnusedAssets\Services\Service $service,
+        protected \Teamnovu\StatamicUnusedAssets\UnusedAssets $service,
     ) {
     }
 

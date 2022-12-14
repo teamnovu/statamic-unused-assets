@@ -22,7 +22,7 @@
         },
         "laravel": {
             "providers": [
-                "Teamnovu\\StatamicUnusedAssets\\ServiceProvider"
+                "Teamnovu\\StatamicUnusedAssets\\StatamicUnusedAssetsServiceProvider"
             ]
         }
     },
