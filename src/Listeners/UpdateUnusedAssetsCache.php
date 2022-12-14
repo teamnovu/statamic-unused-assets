@@ -28,15 +28,28 @@ class UpdateUnusedAssetsCache implements ShouldQueue
     ) {
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
-    public function handle(AssetDeleted|AssetSaved|AssetUploaded|EntrySaved|EntryDeleted|GlobalSetSaved|GlobalSetDeleted|TermSaved|TermDeleted $event)
-    {
-        $this->service->clearCache();
-        $this->service->preloadCache();
-    }
+        public function handle($event)
+        {
+            $this->service->clearCache();
+            $this->service->preloadCache();
+        }
+
+        /**
+         * Register the listeners for the subscriber.
+         *
+         * @param \Illuminate\Events\Dispatcher $events
+         * @return void
+         */
+        public function subscribe($events)
+        {
+            $events->listen(AssetDeleted::class, self::class.'@handle');
+            $events->listen(AssetSaved::class, self::class.'@handle');
+            $events->listen(AssetUploaded::class, self::class.'@handle');
+            $events->listen(EntrySaved::class, self::class.'@handle');
+            $events->listen(EntryDeleted::class, self::class.'@handle');
+            $events->listen(GlobalSetSaved::class, self::class.'@handle');
+            $events->listen(GlobalSetDeleted::class, self::class.'@handle');
+            $events->listen(TermSaved::class, self::class.'@handle');
+            $events->listen(TermDeleted::class, self::class.'@handle');
+        }
 }
