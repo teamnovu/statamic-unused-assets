@@ -47,7 +47,7 @@ The following is an example which shows all the possible config values you can u
 This addon workers due to the potential heavy workload. To test the addon localy a queue worker needs to be running e.g.
 
 ``` bash
-php artisan queue:work
+php artisan queue:listen
 ```
 
 ## Credit
