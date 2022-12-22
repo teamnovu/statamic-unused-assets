@@ -38,14 +38,14 @@ class UpdateUnusedAssetsCacheListener implements ShouldQueue
          */
         public function subscribe($events)
         {
-            $events->listen(AssetDeleted::class, [self::class,'handle']);
-            $events->listen(AssetSaved::class, [self::class,'handle']);
-            $events->listen(AssetUploaded::class, [self::class,'handle']);
-            $events->listen(EntrySaved::class, [self::class,'handle']);
-            $events->listen(EntryDeleted::class, [self::class,'handle']);
-            $events->listen(GlobalSetSaved::class, [self::class,'handle']);
-            $events->listen(GlobalSetDeleted::class, [self::class,'handle']);
-            $events->listen(TermSaved::class, [self::class,'handle']);
-            $events->listen(TermDeleted::class, [self::class,'handle']);
+            $events->listen(AssetDeleted::class, [self::class, 'handle']);
+            $events->listen(AssetSaved::class, [self::class, 'handle']);
+            $events->listen(AssetUploaded::class, [self::class, 'handle']);
+            $events->listen(EntrySaved::class, [self::class, 'handle']);
+            $events->listen(EntryDeleted::class, [self::class, 'handle']);
+            $events->listen(GlobalSetSaved::class, [self::class, 'handle']);
+            $events->listen(GlobalSetDeleted::class, [self::class, 'handle']);
+            $events->listen(TermSaved::class, [self::class, 'handle']);
+            $events->listen(TermDeleted::class, [self::class, 'handle']);
         }
 }
