@@ -8,7 +8,7 @@ This addon adds a widget which you can add to your dashboard. If there are asset
 
 ## How to Install
 
-You can run the following command from your project root:
+Run the following command in your project root:
 
 ``` bash
 composer require teamnovu/statamic-unused-assets
@@ -26,7 +26,7 @@ The following is an example which shows all the possible config values you can u
 
         [
             'type' => 'unused-assets', // Required
-            'limit' => 300, // Default: 300 – The number of images to display in the widget.
+            'limit' => 300, // Default: 300 – The number of images to display from the widget.
             'width' => 100, // Default: 100 – The size of the widget.
             'excluded_paths' => [], // Example: ['assets/myFolder/'] - Default: [] – The paths to exclude from the search.
         ],
