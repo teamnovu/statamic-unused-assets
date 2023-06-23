@@ -24,28 +24,28 @@ class UpdateUnusedAssetsCacheListener implements ShouldQueue
     ) {
     }
 
-        public function handle($event)
-        {
-            $this->unusedAssets->clearCache();
-            $this->unusedAssets->preloadCache();
-        }
+    public function handle($event)
+    {
+        $this->unusedAssets->clearCache();
+        $this->unusedAssets->preloadCache();
+    }
 
-        /**
-         * Register the listeners for the subscriber.
-         *
-         * @param \Illuminate\Events\Dispatcher $events
-         * @return void
-         */
-        public function subscribe($events)
-        {
-            $events->listen(AssetDeleted::class, [self::class, 'handle']);
-            $events->listen(AssetSaved::class, [self::class, 'handle']);
-            $events->listen(AssetUploaded::class, [self::class, 'handle']);
-            $events->listen(EntrySaved::class, [self::class, 'handle']);
-            $events->listen(EntryDeleted::class, [self::class, 'handle']);
-            $events->listen(GlobalSetSaved::class, [self::class, 'handle']);
-            $events->listen(GlobalSetDeleted::class, [self::class, 'handle']);
-            $events->listen(TermSaved::class, [self::class, 'handle']);
-            $events->listen(TermDeleted::class, [self::class, 'handle']);
-        }
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param \Illuminate\Events\Dispatcher $events
+     * @return void
+     */
+    public function subscribe($events)
+    {
+        $events->listen(AssetDeleted::class, [self::class, 'handle']);
+        $events->listen(AssetSaved::class, [self::class, 'handle']);
+        $events->listen(AssetUploaded::class, [self::class, 'handle']);
+        $events->listen(EntrySaved::class, [self::class, 'handle']);
+        $events->listen(EntryDeleted::class, [self::class, 'handle']);
+        $events->listen(GlobalSetSaved::class, [self::class, 'handle']);
+        $events->listen(GlobalSetDeleted::class, [self::class, 'handle']);
+        $events->listen(TermSaved::class, [self::class, 'handle']);
+        $events->listen(TermDeleted::class, [self::class, 'handle']);
+    }
 }
