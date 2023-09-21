@@ -2,9 +2,6 @@
 
 namespace Teamnovu\StatamicUnusedAssets\Listeners;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
 use Statamic\Events\AssetDeleted;
 use Statamic\Events\AssetSaved;
 use Statamic\Events\AssetUploaded;
@@ -18,7 +15,6 @@ use Teamnovu\StatamicUnusedAssets\Jobs\UpdateUnusedAssetsCacheJob;
 
 class UpdateUnusedAssetsCacheListener
 {
-
     public function handle($event)
     {
         UpdateUnusedAssetsCacheJob::dispatch();
