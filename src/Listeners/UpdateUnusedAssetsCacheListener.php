@@ -2,8 +2,6 @@
 
 namespace Teamnovu\StatamicUnusedAssets\Listeners;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Statamic\Events\AssetDeleted;
 use Statamic\Events\AssetSaved;
 use Statamic\Events\AssetUploaded;
@@ -13,21 +11,13 @@ use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
-use Teamnovu\StatamicUnusedAssets\UnusedAssets;
+use Teamnovu\StatamicUnusedAssets\Jobs\UpdateUnusedAssetsCacheJob;
 
-class UpdateUnusedAssetsCacheListener implements ShouldQueue
+class UpdateUnusedAssetsCacheListener
 {
-    use Queueable;
-
-    public function __construct(
-        protected UnusedAssets $unusedAssets,
-    ) {
-    }
-
     public function handle($event)
     {
-        $this->unusedAssets->clearCache();
-        $this->unusedAssets->preloadCache();
+        UpdateUnusedAssetsCacheJob::dispatch();
     }
 
     /**
