@@ -8,6 +8,7 @@ use Statamic\Facades\Asset;
 use Statamic\Facades\Entry;
 use Statamic\Facades\GlobalSet;
 use Statamic\Facades\Term;
+use Statamic\Facades\Nav;
 
 class UnusedAssets
 {
@@ -35,7 +36,8 @@ class UnusedAssets
     {
         $contents = Entry::all()
             ->merge(Term::all())
-            ->merge(GlobalSet::all());
+            ->merge(GlobalSet::all())
+            ->merge(Nav::all());
 
         collect($contents)->each(function ($content) use ($assets) {
             if ($content instanceof \Statamic\Entries\Entry) {
@@ -51,6 +53,17 @@ class UnusedAssets
                 $set = GlobalSet::findByHandle($content->handle());
                 $data = $set->inDefaultSite();
                 $contentValues = $data->values();
+            }
+
+            if ($content instanceof \Statamic\Structures\Nav) {
+                $contentValues = collect();
+
+                $nav = Nav::findByHandle($content->handle());
+                $data = $nav->trees();
+
+                $data->values()->each(function ($value) use (&$contentValues) {
+                    $contentValues = $contentValues->merge($value->tree());
+                });
             }
 
             $contentValues = $contentValues->toJson();
