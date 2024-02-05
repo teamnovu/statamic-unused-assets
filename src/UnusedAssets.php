@@ -63,7 +63,7 @@ class UnusedAssets
             });
         });
 
-        $assets->multisort('container:desc|title:desc');
+        $assets = $assets->multisort('container:desc|title:desc');
 
         return $assets->map(function ($asset) {
             return [
