@@ -62,9 +62,7 @@ class UnusedAssets
                 $data = $nav->trees();
 
                 $data->values()->each(function ($value) use (&$contentValues) {
-                    $pages = $value->flattenedPages();
-
-                    $contentValues = $contentValues->merge($pages->values());
+                    $contentValues = $contentValues->merge($value->tree());
                 });
             }
 
